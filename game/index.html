@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Harbor — open-world crime</title>
+<style>
+  :root { --cyan:#39e6ff; --gold:#ffd700; --pink:#ff4fd8; --bg:#0b0e1a; --panel:#141828; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: #dfe6ff; font-family: "Segoe UI", system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  header { width: 960px; max-width: 96vw; display: flex; justify-content: space-between; align-items: baseline; padding: 14px 4px 8px; }
+  h1 { font-size: 22px; letter-spacing: 2px; color: var(--pink); text-transform: uppercase; }
+  h1 b { color: var(--cyan); }
+  .sub { font-size: 12px; color: #8b93b8; }
+  #wrap { position: relative; width: 960px; max-width: 96vw; }
+  canvas { display: block; width: 100%; background: #070818; border: 1px solid #232a4d; border-radius: 8px; }
+  .overlay { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: rgba(4,5,16,.82); border-radius: 8px; text-align: center; padding: 20px; }
+  .overlay.show { display: flex; }
+  .overlay h2 { font-size: 36px; letter-spacing: 3px; text-transform: uppercase; }
+  .overlay h2.pink { color: var(--pink); }
+  .overlay h2.gold { color: var(--gold); }
+  .overlay h2.red { color: #ff5a4d; }
+  .overlay p { max-width: 580px; color: #b9c1e6; font-size: 14px; line-height: 1.6; }
+  .overlay .big { font-size: 19px; color: #fff; }
+  .keys { font-size: 12px; color: #8b93b8; line-height: 1.9; }
+  .keys kbd { background: #1a1f3d; border: 1px solid #333c66; border-radius: 4px; padding: 1px 6px; color: #dfe6ff; font-family: inherit; }
+  button { background: var(--pink); color: #fff; border: none; border-radius: 6px; padding: 10px 26px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 1px; }
+  button:hover { background: #ff6de0; }
+  button.ghost { background: transparent; color: var(--pink); border: 1px solid var(--pink); }
+  button.gold { background: var(--gold); color: #1a1204; }
+  .row { display: flex; gap: 12px; }
+  footer { width: 960px; max-width: 96vw; padding: 8px 4px 20px; font-size: 12px; color: #6b7398; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Neon <b>Harbor</b></h1>
+  <div class="sub">an open-world crime story &middot; drive, steal, run</div>
+</header>
+<div id="wrap">
+  <canvas id="game" width="960" height="600"></canvas>
+  <div class="overlay show" id="ov-title">
+    <h2 class="pink">Neon <span style="color:var(--cyan)">Harbor</span></h2>
+    <p class="big">Juno Reyes drives for whoever pays. Tonight the job is simple: pick up a package at the docks, deliver it to The Lantern — and when the harbor police turn the whole city against her, lose them and get home.</p>
+    <p>Explore the city on foot or by car. Steal cars, dodge traffic, watch your wanted level — the police ram, and their officers will drag you in. Three missions, then the whole harbor is yours.</p>
+    <div class="row">
+      <button class="gold" id="btn-start">Start the story</button>
+      <button id="btn-continue">Continue</button>
+    </div>
+    <div class="keys">
+      <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrows move &amp; drive &nbsp; <kbd>E</kbd> enter / exit car<br>
+      mouse aim &middot; click shoot &nbsp; <kbd>R</kbd> reload &nbsp; <kbd>P</kbd> pause &nbsp; <kbd>M</kbd> mute
+    </div>
+  </div>
+  <div class="overlay" id="ov-pause">
+    <h2 class="gold">Paused</h2>
+    <p>Press <kbd>P</kbd> to resume.</p>
+    <button class="ghost" id="btn-resume">Resume</button>
+  </div>
+  <div class="overlay" id="ov-busted">
+    <h2 class="red">Busted</h2>
+    <p class="big">The harbor police dragged you in. They kept $200 of your money.</p>
+    <p>You wake up at the hospital, clean — for now.</p>
+    <button id="btn-busted">Back to the streets</button>
+  </div>
+  <div class="overlay" id="ov-wasted">
+    <h2 class="red">Wasted</h2>
+    <p class="big">You went down in the streets of Neon Harbor.</p>
+    <p>You wake up at the hospital, patched up and ready to go again.</p>
+    <button id="btn-wasted">Back to the streets</button>
+  </div>
+</div>
+<footer>
+  <span>Neon Harbor &middot; a make.fun gta6-01 entry &middot; an original game, no real city, no real gangsters</span>
+  <span>WASD drive &middot; E car &middot; click shoot</span>
+</footer>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
